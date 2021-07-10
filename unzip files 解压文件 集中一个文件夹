@@ -1,0 +1,20 @@
+import os
+import zipfile
+original_data= r'D:/aaa/原始数据'
+CSV=r'D:/aaa/CSV'
+
+#def解压文件zip的函数
+def unzip_file(data, CSV):
+    aa = zipfile.is_zipfile(data) #是个zip路径
+    if aa:
+        fz = zipfile.ZipFile(data, 'r')#读取zip文件例的所有文件
+        for file in fz.namelist():
+            fz.extract(file, CSV)  #在CSV路径里 写出所有读取文件(零散的所有)
+    else:
+        print('This is not zip')
+#主程序
+data_list=os.listdir(original_data)
+for data_zip in data_list:
+    data=original_data +'/'+data_zip
+    print(data)  #检查路径名字
+    unzip_file(data, CSV)
